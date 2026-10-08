@@ -205,10 +205,12 @@ footer{background:#111;color:#fff;text-align:center;padding:35px 20px}.muted{col
 <section id="admin">
 <div class="section-title"><h2>NP Fashion Admin</h2><p>Manage products and demo orders from this browser.</p></div>
 <div id="adminLogin" class="admin-login">
-<label style="font-weight:700;display:block;margin-bottom:6px">Admin password</label>
+<label style="font-weight:700;display:block;margin-bottom:6px">Admin email</label>
+<input id="adminEmail" type="email" placeholder="Enter admin email">
+<label style="font-weight:700;display:block;margin:10px 0 6px">Admin password</label>
 <input id="adminPass" type="password" placeholder="Enter admin password">
 <button class="add" style="margin-top:12px" onclick="adminLogin()">Open Admin Panel</button>
-<p class="notice">Demo password: <b>NP2026</b>. Change it before using a real business system.</p>
+<p id="adminLoginMsg" class="notice"></p>
 </div>
 <div id="adminPanel" style="display:none">
 <div class="admin-grid">
@@ -252,12 +254,55 @@ const products=[
 let cart=JSON.parse(localStorage.getItem('npCart')||'[]'), discount=0;
 
 
-function adminLogin(){
- if(document.getElementById('adminPass').value==='NP2026'){
-  document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();
- }else alert('Wrong password.');
+let adminToken = localStorage.getItem('npAdminToken') || '';
+
+async function adminLogin(){
+  const email = document.getElementById('adminEmail').value.trim();
+  const password = document.getElementById('adminPass').value;
+  const msg = document.getElementById('adminLoginMsg');
+
+  if(!email || !password){
+    msg.textContent='Email and password are required.';
+    return;
+  }
+
+  try{
+    const response = await fetch(BACKEND_URL + '/api/admin/login', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,password})
+    });
+    const data = await response.json();
+
+    if(!response.ok || !data.success){
+      msg.textContent=data.message || 'Login failed.';
+      return;
+    }
+
+    adminToken=data.token;
+    localStorage.setItem('npAdminToken', adminToken);
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminPanel').style.display='block';
+    msg.textContent='';
+    renderAdmin();
+  }catch(error){
+    msg.textContent='Unable to connect to server.';
+  }
 }
-function adminLogout(){document.getElementById('adminPanel').style.display='none';document.getElementById('adminLogin').style.display='block'}
+
+function adminLogout(){
+  const token = localStorage.getItem('npAdminToken');
+  if(token){
+    fetch(BACKEND_URL + '/api/admin/logout', {
+      method:'POST',
+      headers:{Authorization:'Bearer '+token}
+    }).catch(()=>{});
+  }
+  localStorage.removeItem('npAdminToken');
+  adminToken='';
+  document.getElementById('adminPanel').style.display='none';
+  document.getElementById('adminLogin').style.display='block';
+}
 function adminAddProduct(){
  let name=document.getElementById('newName').value.trim(),price=Number(document.getElementById('newPrice').value),cat=document.getElementById('newCat').value,desc=document.getElementById('newDesc').value.trim();
  if(!name||!price){alert('Enter product name and price.');return}
