@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="description" content="NP Fashion - Custom printed T-shirts, oversized T-shirts and polo T-shirts. Design your own T-shirt and order easily."><meta name="theme-color" content="#111111"><meta property="og:title" content="NP Fashion - Custom T-shirts"><meta property="og:description" content="Premium custom printed T-shirts by NP Fashion."><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NP Fashion — Custom T-Shirts</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Arial,sans-serif;background:#f7f7f7;color:#111;line-height:1.5}
+header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #eee}
+.nav{max-width:1150px;margin:auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}.logo span{color:#ff4d2e}
+nav a{margin-left:22px;text-decoration:none;color:#222;font-weight:600;font-size:14px}
+.cart{border:0;background:#111;color:#fff;padding:10px 15px;border-radius:10px;cursor:pointer}
+.hero{background:linear-gradient(135deg,#111 0%,#252525 60%,#ff4d2e 140%);color:white}
+.hero-inner{max-width:1150px;margin:auto;padding:85px 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.badge{display:inline-block;background:#ffffff18;border:1px solid #ffffff30;padding:7px 12px;border-radius:999px;font-size:12px;margin-bottom:18px}
+h1{font-size:clamp(42px,7vw,76px);line-height:.98;letter-spacing:-3px;margin-bottom:20px}
+.hero p{color:#ddd;max-width:560px;margin-bottom:28px}
+.btn{display:inline-block;padding:14px 21px;border-radius:12px;text-decoration:none;font-weight:800;border:0;cursor:pointer}
+.btn-primary{background:#ff5a36;color:#fff}.btn-light{background:#fff;color:#111;margin-left:8px}
+.tshirt{height:370px;display:flex;align-items:center;justify-content:center}
+.shirt{width:250px;height:280px;background:#fff;position:relative;clip-path:polygon(27% 4%,40% 0,50% 10%,60% 0,73% 4%,96% 24%,82% 47%,72% 36%,72% 100%,28% 100%,28% 36%,18% 47%,4% 24%);filter:drop-shadow(0 25px 25px #0008)}
+.shirt:after{content:"NP";position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font-size:38px;font-weight:900;color:#111}
+section{max-width:1150px;margin:auto;padding:70px 20px}
+.section-title{text-align:center;margin-bottom:35px}.section-title h2{font-size:36px}.section-title p{color:#666}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid #eee;box-shadow:0 8px 25px #00000008}
+.product-img{height:250px;display:flex;align-items:center;justify-content:center;background:#eee}
+.card:nth-child(2) .product-img{background:#e9eef5}.card:nth-child(3) .product-img{background:#f3e9e3}
+.card-body{padding:20px}.card-body h3{margin-bottom:5px}.price{font-weight:900;font-size:20px;margin:12px 0}.add{width:100%;background:#111;color:white;border:0;border-radius:10px;padding:12px;cursor:pointer;font-weight:700}
+.custom{background:#111;color:white;border-radius:25px;padding:45px;display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.custom p{color:#ccc}.custom-box{background:#fff;color:#111;padding:25px;border-radius:18px}.custom-box label{font-weight:700;display:block;margin:12px 0 6px}
+input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px}
+.preview{height:210px;border-radius:14px;background:#eee;display:flex;align-items:center;justify-content:center;margin-bottom:15px;overflow:hidden}
+.preview .shirt{transform:scale(.55)}
+footer{background:#111;color:#fff;text-align:center;padding:35px 20px}.muted{color:#aaa;font-size:14px}
+#cartCount{display:inline-block;background:#ff5a36;border-radius:50%;padding:1px 6px;margin-left:4px}
+@media(max-width:800px){nav a{display:none}.hero-inner,.custom{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero-inner{padding:60px 20px}.tshirt{height:280px}section{padding:50px 18px}}
+
+.order-panel{background:#fff;border:1px solid #eee;border-radius:20px;padding:25px;box-shadow:0 10px 30px #0000000a;margin-top:25px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid .full{grid-column:1/-1}
+.order-panel label{font-weight:700;font-size:14px;display:block;margin-bottom:6px}
+.qty{display:flex;gap:8px;align-items:center}.qty button{width:38px;height:38px;border:1px solid #ddd;background:#fff;border-radius:8px;font-size:20px;cursor:pointer}.qty input{width:70px;text-align:center}
+.swatches{display:flex;gap:9px}.swatch{width:34px;height:34px;border-radius:50%;border:2px solid #ddd;cursor:pointer}.swatch.active{outline:3px solid #ff5a36;outline-offset:2px}
+.summary{background:#f7f7f7;border-radius:14px;padding:16px;margin-top:18px}
+.whatsapp{background:#20b957!important}.upi{background:#111!important}
+.notice{font-size:13px;color:#666;margin-top:9px}
+@media(max-width:700px){.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
+
+.payment-options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px}
+.payment-option{border:1px solid #ddd;border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#fff;font-weight:700;font-size:13px}
+.payment-option.active{border:2px solid #ff5a36;background:#fff5f2}
+.payment-option input{display:none}
+@media(max-width:700px){.payment-options{grid-template-columns:1fr 1fr}}
+
+.shop-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}.shop-tools input,.shop-tools select{max-width:260px}
+.product-img .shirt{transition:.2s}.product-img:hover .shirt{transform:scale(1.06)}
+.rating{letter-spacing:2px}.tag{display:inline-block;background:#fff0eb;color:#ff5a36;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}
+.cart-drawer{position:fixed;right:-420px;top:0;width:min(400px,92vw);height:100vh;background:#fff;z-index:50;box-shadow:-15px 0 40px #0002;padding:25px;transition:.3s;overflow:auto}.cart-drawer.open{right:0}
+.cart-item{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #eee;padding:14px 0}.remove{border:0;background:none;color:#d33;cursor:pointer}
+.overlay{position:fixed;inset:0;background:#0005;z-index:40;display:none}.overlay.open{display:block}
+.coupon{display:flex;gap:7px;margin-top:12px}.coupon input{flex:1}.small-btn{padding:10px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer}
+.track{background:#111;color:#fff;border-radius:22px;padding:35px}.track input{max-width:400px;margin:12px 0}
+.review{padding:20px;background:#fff;border-radius:15px;border:1px solid #eee}.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:700px){.reviews{grid-template-columns:1fr}}
+
+.admin-login{max-width:520px;margin:auto;background:#fff;border:1px solid #eee;border-radius:18px;padding:25px}
+.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:25px 0}.stat{background:#fff;border:1px solid #eee;border-radius:15px;padding:20px}.stat b{font-size:28px}
+.admin-table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden}.admin-table th,.admin-table td{padding:12px;border-bottom:1px solid #eee;text-align:left;font-size:13px}
+.status{padding:5px 8px;border-radius:999px;background:#fff0eb;font-size:11px;font-weight:800}
+@media(max-width:800px){.admin-grid{grid-template-columns:1fr 1fr}.admin-table{font-size:12px}}
+
+.theme-toggle{border:1px solid #ddd;background:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}.dark body{background:#0f1115;color:#eee}.dark .card,.dark .order-panel,.dark .stat,.dark .admin-login,.dark .review,.dark .custom-box,.dark input,.dark select,.dark .cart-drawer{background:#171a21;color:#eee;border-color:#2b303a}.dark .muted,.dark p{color:#b9bec8}.dark header{background:#111318;color:#fff}.dark .theme-toggle{background:#171a21;color:#fff;border-color:#333}.wish{border:1px solid #ddd;background:#fff;border-radius:9px;padding:9px 11px;cursor:pointer}.wish.active{background:#ffe7e1}.stock{font-size:12px;font-weight:800;margin:7px 0}.low{color:#c2410c}.out{color:#c00}.extra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.profile-box{background:#fff;border:1px solid #eee;border-radius:16px;padding:20px}.designer-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wishlist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.admin-actions{display:flex;gap:8px;flex-wrap:wrap}.mini{padding:8px 10px;border:0;border-radius:8px;cursor:pointer}.dark .profile-box,.dark .theme-toggle,.dark .wish{background:#171a21;color:#eee;border-color:#333}@media(max-width:800px){.extra-grid,.wishlist-grid{grid-template-columns:1fr}.designer-controls{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="nav">
+<div class="logo">NP <span>Fashion</span></div>
+<nav><a href="#home">Home</a><a href="#shop">T-Shirts</a><a href="#custom">Custom Design</a><a href="#wishlist">Wishlist</a><a href="#account">Account</a><a href="#about">About</a><a href="#order">Order</a><a href="#admin">Admin</a></nav>
+<div style="display:flex;gap:8px;align-items:center"><button class="theme-toggle" onclick="toggleTheme()">🌙</button><button class="cart" onclick="showCart()">Cart <span id="cartCount">0</span></button></div>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home" style="max-width:none">
+<div class="hero-inner">
+<div>
+<span class="badge">CUSTOM T-SHIRT PRINTING</span>
+<h1>Wear Your<br>Own Style.</h1>
+<p>Premium custom printed T-shirts made for your ideas. Upload your design, add text and create a look that's uniquely yours.</p>
+<a class="btn btn-primary" href="#custom">Create Your T-Shirt</a>
+<a class="btn btn-light" href="#shop">Shop Now</a>
+</div>
+<div class="tshirt"><div class="shirt"></div></div>
+</div>
+</section>
+
+<section id="shop">
+<div class="section-title"><h2>Shop T-Shirts</h2><p>Pick your favourite style.</p></div>
+<div class="shop-tools">
+<input id="searchBox" placeholder="🔎 Search T-shirts..." oninput="renderProducts()">
+<select id="categoryFilter" onchange="renderProducts()"><option value="All">All styles</option><option>Classic</option><option>Oversized</option><option>Polo</option></select>
+<select id="priceFilter" onchange="renderProducts()"><option value="All">All prices</option><option value="500">Under ₹500</option><option value="700">Under ₹700</option></select>
+</div>
+<div class="grid" id="productGrid"></div>
+</section>
+
+<section id="custom">
+<div class="custom">
+<div><span class="badge">NP CUSTOM STUDIO</span><h2 style="font-size:40px;margin-bottom:12px">Create your own T-shirt.</h2><p>Upload a logo or photo, choose your T-shirt and add your custom text. This demo gives you the front-end experience; payment and real order processing can be connected later.</p></div>
+<div class="custom-box">
+<div class="preview" id="preview"><div class="shirt"></div></div>
+<label>T-shirt colour</label><select id="color" onchange="changeColor()"><option value="#fff">White</option><option value="#111">Black</option><option value="#2563eb">Blue</option><option value="#dc2626">Red</option></select>
+<label>Custom text</label><input id="text" placeholder="e.g. NP Fashion" oninput="changeText()">
+<label>Upload design</label><input type="file" accept="image/*" onchange="uploadDesign(event)">
+<button class="add" style="margin-top:15px" onclick="addCustomToCart()">Add Custom T-Shirt — ₹799</button>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="section-title"><h2>Why NP Fashion?</h2><p>Simple, stylish and made for you.</p></div>
+<div class="grid">
+<div class="card"><div class="card-body"><h3>Premium Quality</h3><p>Comfortable fabric and sharp printing for everyday wear.</p></div></div>
+<div class="card"><div class="card-body"><h3>Your Design</h3><p>Turn your photo, logo or idea into a custom T-shirt.</p></div></div>
+<div class="card"><div class="card-body"><h3>Easy Ordering</h3><p>Pick a product, customize it and add it to your cart.</p></div></div>
+</div>
+</section>
+
+<section id="order">
+<div class="section-title"><h2>Quick Order</h2><p>Select your T-shirt and send the order directly on WhatsApp.</p></div>
+<div class="order-panel">
+<div class="form-grid">
+<div><label>Product</label><select id="orderProduct" onchange="updateOrderPrice()">
+<option value="Classic Black|499">Classic Black — ₹499</option>
+<option value="Classic White|499">Classic White — ₹499</option>
+<option value="Oversized Beige|699">Oversized Beige — ₹699</option>
+<option value="Custom T-Shirt|799">Custom T-Shirt — ₹799</option>
+</select></div>
+<div><label>Size</label><select id="orderSize"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+<div><label>Colour</label><div class="swatches">
+<button class="swatch active" style="background:#111" onclick="pickColor(this,'Black')"></button>
+<button class="swatch" style="background:#fff" onclick="pickColor(this,'White')"></button>
+<button class="swatch" style="background:#2563eb" onclick="pickColor(this,'Blue')"></button>
+<button class="swatch" style="background:#dc2626" onclick="pickColor(this,'Red')"></button>
+</div><input type="hidden" id="orderColor" value="Black"></div>
+<div><label>Quantity</label><div class="qty"><button onclick="changeQty(-1)">−</button><input id="orderQty" value="1" readonly><button onclick="changeQty(1)">+</button></div></div>
+<div><label>Your Name</label><input id="customerName" placeholder="Enter your name"></div>
+<div><label>Phone Number</label><input id="customerPhone" placeholder="10-digit mobile number"></div>
+<div class="full"><label>Delivery Address</label><input id="customerAddress" placeholder="House, area, city, PIN code"></div>
+<div class="full"><label>Extra note (optional)</label><input id="customerNote" placeholder="Print position, special request, etc."></div>
+<div class="full"><label>Payment Method</label>
+<div class="payment-options">
+<label class="payment-option active"><input type="radio" name="payment" value="Cash on Delivery" checked onchange="selectPayment(this)">💵 COD</label>
+<label class="payment-option"><input type="radio" name="payment" value="UPI" onchange="selectPayment(this)">📱 UPI</label>
+</div></div>
+
+</div>
+<div class="summary"><b>Order total: <span id="orderTotal">₹499</span></b><div class="notice">Replace the WhatsApp number in the code with your NP Fashion business number before taking real orders.</div></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+<button class="btn btn-primary whatsapp" onclick="sendWhatsApp()">📱 Order on WhatsApp</button>
+<button class="btn upi" onclick="showUPI()">📱 UPI / QR Payment</button>
+
+</div>
+</div>
+</section>
+
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Your Cart</h2><button class="small-btn" onclick="closeCart()">✕</button></div>
+<div id="cartItems"></div>
+<div class="coupon"><input id="couponInput" placeholder="Coupon code"><button class="small-btn" onclick="applyCoupon()">Apply</button></div>
+<p style="margin-top:15px">Subtotal: <b id="cartSubtotal">₹0</b></p>
+<p>Discount: <b id="cartDiscount">₹0</b></p>
+<p>Delivery: <b id="cartDelivery">₹0</b></p>
+<h3 style="margin-top:8px">Total: <span id="cartTotal">₹0</span></h3>
+<button class="add" style="margin-top:15px" onclick="goToOrder()">Proceed to Order</button>
+</aside>
+</main>
+
+
+<section>
+<div class="section-title"><h2>Customer Reviews</h2><p>What customers say about NP Fashion.</p></div>
+<div class="reviews">
+<div class="review"><div class="rating">★★★★★</div><b>Rahul</b><p>Great quality and comfortable fit.</p></div>
+<div class="review"><div class="rating">★★★★★</div><b>Priya</b><p>Print quality looks clean and premium.</p></div>
+<div class="review"><div class="rating">★★★★☆</div><b>Amit</b><p>Good oversized fit. Loved the design.</p></div>
+</div>
+</section>
+<section>
+<div class="track"><h2>Track Your Order</h2><p style="color:#ccc">Enter your NP Fashion Order ID.</p><input id="trackId" placeholder="e.g. NP1001"><button class="btn btn-primary" onclick="trackOrder()">Track Order</button><p id="trackResult" style="margin-top:15px"></p></div>
+</section>
+
+
+<section id="wishlist"><div class="section-title"><h2>❤️ Wishlist</h2><p>Your saved favourites.</p></div><div id="wishlistGrid" class="wishlist-grid"></div></section>
+
+<section id="account"><div class="section-title"><h2>👤 My Account</h2><p>Browser-based customer profile and order history.</p></div><div class="extra-grid"><div class="profile-box"><h3>Customer Profile</h3><input id="profileName" placeholder="Your name"><input id="profilePhone" placeholder="Phone number" style="margin-top:10px"><input id="profileCity" placeholder="City / PIN" style="margin-top:10px"><button class="add" style="margin-top:12px" onclick="saveProfile()">Save Profile</button><p id="profileMsg" class="muted"></p></div><div class="profile-box"><h3>Order History</h3><div id="orderHistory"></div></div><div class="profile-box"><h3>Quick Actions</h3><button class="mini" onclick="printInvoice()">🧾 Print / Save Invoice</button><button class="mini" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">🛍️ Continue Shopping</button></div></div></section>
+
+<section id="features"><div class="section-title"><h2>⭐ More NP Fashion Features</h2><p>Everything that can run directly in this website file.</p></div><div class="extra-grid"><div class="card"><div class="card-body"><h3>⭐ Rate Products</h3><p>Customers can submit a browser-saved rating.</p><div id="ratingBox"></div></div></div><div class="card"><div class="card-body"><h3>🎨 Advanced Designer</h3><p>Change text size and position on your custom T-shirt.</p><div class="designer-controls"><input id="designSize" type="number" value="20" min="10" max="50" placeholder="Text size"><select id="designPosition"><option value="center">Center</option><option value="top">Top</option><option value="bottom">Bottom</option></select></div></div></div><div class="card"><div class="card-body"><h3>🔎 SEO Ready</h3><p>Title, description, mobile layout and social sharing metadata are included for deployment.</p></div></div></div></section>
+
+<section id="admin">
+<div class="section-title"><h2>NP Fashion Admin</h2><p>Manage products and demo orders from this browser.</p></div>
+<div id="adminLogin" class="admin-login">
+<label style="font-weight:700;display:block;margin-bottom:6px">Admin password</label>
+<input id="adminPass" type="password" placeholder="Enter admin password">
+<button class="add" style="margin-top:12px" onclick="adminLogin()">Open Admin Panel</button>
+<p class="notice">Demo password: <b>NP2026</b>. Change it before using a real business system.</p>
+</div>
+<div id="adminPanel" style="display:none">
+<div class="admin-grid">
+<div class="stat"><span>Products</span><br><b id="aProducts">0</b></div>
+<div class="stat"><span>Cart items</span><br><b id="aCart">0</b></div>
+<div class="stat"><span>Cart value</span><br><b id="aValue">₹0</b></div>
+<div class="stat"><span>Website</span><br><b>Live</b></div>
+</div>
+<div class="order-panel">
+<h3>Add Product</h3>
+<div class="form-grid">
+<input id="newName" placeholder="Product name"><input id="newPrice" type="number" placeholder="Price">
+<select id="newCat"><option>Classic</option><option>Oversized</option><option>Polo</option></select>
+<input id="newDesc" placeholder="Description"><input id="newStock" type="number" min="0" value="10" placeholder="Stock"><input id="newImage" type="file" accept="image/*">
+</div>
+<button class="btn btn-primary" style="margin-top:12px" onclick="adminAddProduct()">Add Product</button>
+</div>
+<div class="order-panel">
+<h3>Current Products</h3><div id="adminProducts"></div>
+</div>
+<button class="btn" style="background:#eee;color:#111;margin-top:15px" onclick="adminLogout()">Logout</button>
+</div>
+</section>
+<footer><h2>NP Fashion</h2><p class="muted">Custom T-shirts • Your style, your print.</p><p class="muted" style="margin-top:12px">© 2026 NP Fashion</p></footer>
+
+
+
+<script>
+const WHATSAPP_NUMBER='918293532208';
+const UPI_ID='bera87936-2@okaxis';
+const BACKEND_URL='https://np-fashion-backend.onrender.com';
+
+const products=[
+{name:'Classic Black',price:499,cat:'Classic',color:'#111',desc:'Premium cotton'},
+{name:'Classic White',price:499,cat:'Classic',color:'#fff',desc:'Premium cotton'},
+{name:'Oversized Beige',price:699,cat:'Oversized',color:'#c8a58e',desc:'Heavyweight fit'},
+{name:'Oversized Black',price:699,cat:'Oversized',color:'#111',desc:'Heavyweight fit'},
+{name:'Classic Polo',price:799,cat:'Polo',color:'#2563eb',desc:'Premium polo fit'},
+{name:'Polo White',price:799,cat:'Polo',color:'#fff',desc:'Premium polo fit'}
+];
+let cart=JSON.parse(localStorage.getItem('npCart')||'[]'), discount=0;
+
+
+function adminLogin(){
+ if(document.getElementById('adminPass').value==='NP2026'){
+  document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdmin();
+ }else alert('Wrong password.');
+}
+function adminLogout(){document.getElementById('adminPanel').style.display='none';document.getElementById('adminLogin').style.display='block'}
+function adminAddProduct(){
+ let name=document.getElementById('newName').value.trim(),price=Number(document.getElementById('newPrice').value),cat=document.getElementById('newCat').value,desc=document.getElementById('newDesc').value.trim();
+ if(!name||!price){alert('Enter product name and price.');return}
+ products.push({name,price,cat,color:'#111',desc:desc||'NP Fashion T-shirt'});renderProducts();renderAdmin();
+ document.getElementById('newName').value='';document.getElementById('newPrice').value='';document.getElementById('newDesc').value='';
+}
+function renderAdmin(){
+ document.getElementById('aProducts').textContent=products.length;
+ let count=cart.reduce((n,x)=>n+x.qty,0),value=cart.reduce((n,x)=>n+x.price*x.qty,0);
+ document.getElementById('aCart').textContent=count;document.getElementById('aValue').textContent='₹'+value;
+ document.getElementById('adminProducts').innerHTML='<table class="admin-table"><tr><th>Product</th><th>Category</th><th>Price</th></tr>'+products.map(p=>`<tr><td>${p.name}</td><td><span class="status">${p.cat}</span></td><td>₹${p.price}</td></tr>`).join('')+'</table>';
+}
+
+function renderProducts(){
+ const q=(document.getElementById('searchBox')?.value||'').toLowerCase(), cat=document.getElementById('categoryFilter')?.value||'All', pf=document.getElementById('priceFilter')?.value||'All';
+ const list=products.filter(p=>(!q||p.name.toLowerCase().includes(q))&&(cat==='All'||p.cat===cat)&&(pf==='All'||p.price<=Number(pf)));
+ document.getElementById('productGrid').innerHTML=list.map((p,i)=>`<div class="card"><div class="product-img"><div class="shirt" style="background:${p.color}"></div></div><div class="card-body"><span class="tag">${p.cat}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="rating">★★★★★</div><div class="price">₹${p.price}</div><button class="add" onclick="addCart(${products.indexOf(p)})">Add to Cart</button></div></div>`).join('')||'<p>No products found.</p>';
+}
+function addCart(i){let p=products[i], item=cart.find(x=>x.name===p.name);if(item)item.qty++;else cart.push({name:p.name,price:p.price,qty:1});saveCart();openCart()}
+function saveCart(){localStorage.setItem('npCart',JSON.stringify(cart));updateCart()}
+function updateCart(){
+ document.getElementById('cartCount').textContent=cart.reduce((n,x)=>n+x.qty,0);
+ let sub=cart.reduce((n,x)=>n+x.price*x.qty,0), delivery=sub? (sub>=999?0:60):0, total=Math.max(0,sub-discount+delivery);
+ document.getElementById('cartItems').innerHTML=cart.length?cart.map((x,i)=>`<div class="cart-item"><div><b>${x.name}</b><br>₹${x.price} × ${x.qty}</div><div><button class="small-btn" onclick="changeCart(${i},-1)">−</button> <button class="small-btn" onclick="changeCart(${i},1)">+</button><br><button class="remove" onclick="removeCart(${i})">Remove</button></div></div>`).join(''):'<p style="margin-top:25px;color:#666">Your cart is empty.</p>';
+ document.getElementById('cartSubtotal').textContent='₹'+sub;document.getElementById('cartDiscount').textContent='₹'+discount;document.getElementById('cartDelivery').textContent='₹'+delivery;document.getElementById('cartTotal').textContent='₹'+total;
+}
+function changeCart(i,n){cart[i].qty+=n;if(cart[i].qty<=0)cart.splice(i,1);saveCart()}
+function removeCart(i){cart.splice(i,1);saveCart()}
+function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('overlay').classList.add('open');updateCart()}
+function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('overlay').classList.remove('open')}
+function applyCoupon(){let c=document.getElementById('couponInput').value.trim().toUpperCase(),sub=cart.reduce((n,x)=>n+x.price*x.qty,0);if(c==='NP10'){discount=Math.round(sub*.10);alert('10% discount applied!')}else if(c==='NP50'){discount=Math.min(50,sub);alert('₹50 discount applied!')}else{discount=0;alert('Invalid coupon. Try NP10 or NP50.')}updateCart()}
+function goToOrder(){closeCart();document.getElementById('order').scrollIntoView({behavior:'smooth'})}
+function showCart(){openCart()}
+function trackOrder(){let id=document.getElementById('trackId').value.trim();document.getElementById('trackResult').textContent=id?'Order '+id+' status: Order received → Processing → Shipping → Delivered. (Demo status)':'Please enter an Order ID.'}
+function changeColor(){document.querySelector('#preview .shirt').style.background=document.getElementById('color').value}
+function changeText(){let s=document.querySelector('#preview .shirt');s.dataset.text=document.getElementById('text').value}
+function uploadDesign(e){let file=e.target.files[0];if(!file)return;let url=URL.createObjectURL(file),p=document.getElementById('preview');p.style.backgroundImage=`url(${url})`;p.style.backgroundSize='contain';p.style.backgroundRepeat='no-repeat';p.style.backgroundPosition='center'}
+function changeQty(n){let el=document.getElementById('orderQty');el.value=Math.max(1,Math.min(20,Number(el.value)+n));updateOrderPrice()}
+function updateOrderPrice(){let [name,price]=document.getElementById('orderProduct').value.split('|');document.getElementById('orderTotal').textContent='₹'+Number(price)*Number(document.getElementById('orderQty').value)}
+function pickColor(btn,color){document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('active'));btn.classList.add('active');window.selectedColor=color}
+function getPayment(){let x=document.querySelector('input[name="payment"]:checked');return x?x.value:'Cash on Delivery'}
+function selectPayment(el){document.querySelectorAll('.payment-option').forEach(x=>x.classList.remove('active'));el.parentElement.classList.add('active')}
+function sendWhatsApp(){
+ let [product,price]=document.getElementById('orderProduct').value.split('|'),qty=document.getElementById('orderQty').value,size=document.getElementById('orderSize').value,name=document.getElementById('customerName').value.trim(),phone=document.getElementById('customerPhone').value.trim(),address=document.getElementById('customerAddress').value.trim(),note=document.getElementById('customerNote').value.trim(),payment=getPayment(),total=Number(price)*Number(qty);
+ if(!name||!phone||!address){alert('Please enter your name, phone number and delivery address.');return}
+ let msg=`Hello NP Fashion! I want to place an order.%0A%0AProduct: ${encodeURIComponent(product)}%0ASize: ${size}%0AColour: ${encodeURIComponent(window.selectedColor||'Black')}%0AQuantity: ${qty}%0ATotal: ₹${total}%0APayment: ${encodeURIComponent(payment)}%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AAddress: ${encodeURIComponent(address)}%0ANote: ${encodeURIComponent(note||'None')}`;
+ window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+msg,'_blank')
+}
+function showUPI(){let amount=document.getElementById('orderTotal').textContent.replace('₹','');if(confirm('UPI ID: '+UPI_ID+'\\nAmount: ₹'+amount+'\\n\\nOpen your UPI app to pay?'))location.href='upi://pay?pa='+encodeURIComponent(UPI_ID)+'&pn=NP%20Fashion&am='+amount+'&cu=INR'}
+renderProducts();updateCart();updateOrderPrice();
+
+function addCustomToCart(){let item=cart.find(x=>x.name==='Custom T-Shirt');if(item)item.qty++;else cart.push({name:'Custom T-Shirt',price:799,qty:1});saveCart();openCart()}
+// ===== NP Fashion final fixes / browser-only storefront =====
+function npEscape(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function refreshOrderProducts(){
+ const sel=document.getElementById('orderProduct'); if(!sel)return;
+ const current=sel.value.split('|')[0];
+ const options=products.map(p=>`<option value="${npEscape(p.name)}|${p.price}">${npEscape(p.name)} — ₹${p.price}${(p.stock??0)<=0?' — OUT OF STOCK':''}</option>`);
+ options.push('<option value="Custom T-Shirt|799">Custom T-Shirt — ₹799</option>');
+ sel.innerHTML=options.join('');
+ const match=[...sel.options].find(o=>o.value.split('|')[0]===current);
+ if(match)sel.value=match.value;
+ updateOrderPrice();
+}
+function changeQty(n){
+ const el=document.getElementById('orderQty');
+ const productName=document.getElementById('orderProduct').value.split('|')[0];
+ const p=products.find(x=>x.name===productName);
+ const max=p?(p.stock??0):20;
+ if(p && max<=0){alert('This product is out of stock.');return;}
+ el.value=Math.max(1,Math.min(p?max:20,Number(el.value)+n));
+ updateOrderPrice();
+}
+function updateOrderPrice(){
+ const sel=document.getElementById('orderProduct'); if(!sel)return;
+ const [name,price]=sel.value.split('|'); const qty=Number(document.getElementById('orderQty').value)||1;
+ const sub=Number(price)*qty; const delivery=sub>=999?0:(sub?60:0);
+ document.getElementById('orderTotal').textContent='₹'+(sub+delivery);
+ const notice=document.querySelector('#order .notice');
+ if(notice) notice.textContent=delivery?'₹60 delivery charge applies below ₹999. Free delivery on ₹999+ orders.':'Free delivery.';
+}
+function addCart(i){
+ const p=products[i]; if(!p)return;
+ const stock=p.stock??0;
+ if(stock<=0){alert('This product is out of stock.');return;}
+ const item=cart.find(x=>x.name===p.name);
+ if(item){if(item.qty>=stock){alert('Stock limit reached.');return;}item.qty++;}
+ else cart.push({name:p.name,price:p.price,qty:1});
+ saveCart();openCart();
+}
+function changeCart(i,n){
+ const item=cart[i],p=item&&products.find(x=>x.name===item.name);
+ if(!item)return;
+ if(n>0 && p && item.qty>=(p.stock??0)){alert('Stock limit reached.');return;}
+ item.qty+=n;if(item.qty<=0)cart.splice(i,1);saveCart();
+}
+function adminAddProduct(){
+ let name=document.getElementById('newName').value.trim(),price=Number(document.getElementById('newPrice').value),cat=document.getElementById('newCat').value,desc=document.getElementById('newDesc').value.trim(),stock=Math.max(0,Number(document.getElementById('newStock').value||0)),file=document.getElementById('newImage').files[0];
+ if(!name||!price||price<1){alert('Enter a valid product name and price.');return}
+ if(products.some(p=>p.name.toLowerCase()===name.toLowerCase())){alert('A product with this name already exists.');return}
+ const add=(image='')=>{products.push({name,price,cat,color:'#111',desc:desc||'NP Fashion T-shirt',stock,image});persistProducts();renderProducts();renderWishlist();refreshOrderProducts();renderAdmin();['newName','newPrice','newDesc','newStock','newImage'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=id==='newStock'?'10':''});alert('Product added successfully.');};
+ if(file){if(file.size>1500000){alert('Please use an image under 1.5 MB.');return;}const r=new FileReader();r.onload=()=>add(r.result);r.readAsDataURL(file)}else add();
+}
+function renderProducts(){
+ const q=(document.getElementById('searchBox')?.value||'').toLowerCase(),cat=document.getElementById('categoryFilter')?.value||'All',pf=document.getElementById('priceFilter')?.value||'All';
+ const list=products.filter(p=>(!q||p.name.toLowerCase().includes(q))&&(cat==='All'||p.cat===cat)&&(pf==='All'||p.price<=Number(pf)));
+ document.getElementById('productGrid').innerHTML=list.map(p=>{const i=products.indexOf(p),fav=wishlist.includes(p.name),stock=p.stock??0;return `<div class="card"><div class="product-img">${p.image?`<img src="${p.image}" style="width:100%;height:180px;object-fit:cover;border-radius:12px">`:`<div class="shirt" style="background:${p.color}"></div>`}</div><div class="card-body"><button class="wish ${fav?'active':''}" onclick="toggleWish(${i})">${fav?'❤️':'♡'} Wishlist</button><span class="tag">${npEscape(p.cat)}</span><h3>${npEscape(p.name)}</h3><p>${npEscape(p.desc)}</p><div class="rating">★★★★★</div><div class="price">₹${p.price}</div><div class="stock ${stock<=3?'low':''} ${stock===0?'out':''}">${stock===0?'Out of stock':stock<=3?'Only '+stock+' left':'In stock: '+stock}</div><button class="add" ${stock===0?'disabled':''} onclick="addCart(${i})">${stock===0?'Out of Stock':'Add to Cart'}</button></div></div>`}).join('')||'<p>No products found.</p>';
+}
+function renderAdmin(){
+ document.getElementById('aProducts').textContent=products.length;let count=cart.reduce((n,x)=>n+x.qty,0),value=cart.reduce((n,x)=>n+x.price*x.qty,0);document.getElementById('aCart').textContent=count;document.getElementById('aValue').textContent='₹'+value;
+ document.getElementById('adminProducts').innerHTML='<table class="admin-table"><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Action</th></tr>'+products.map((p,i)=>`<tr><td>${npEscape(p.name)}</td><td><span class="status">${npEscape(p.cat)}</span></td><td>₹${p.price}</td><td>${p.stock??0}</td><td><div class="admin-actions"><button class="mini" onclick="changeStock(${i},1)">+1</button><button class="mini" onclick="changeStock(${i},-1)">−1</button><button class="mini" onclick="deleteProduct(${i})">Delete</button></div></td></tr>`).join('')+'</table>';
+}
+function changeStock(i,delta){if(!products[i])return;products[i].stock=Math.max(0,(products[i].stock??0)+delta);persistProducts();renderProducts();refreshOrderProducts();renderAdmin();}
+function deleteProduct(i){if(!products[i])return;if(!confirm('Delete this product?'))return;cart=cart.filter(x=>x.name!==products[i].name);products.splice(i,1);persistProducts();saveCart();renderProducts();renderWishlist();refreshOrderProducts();renderAdmin();}
+function updateDesigner(){
+ const s=document.querySelector('#preview .shirt'),t=document.getElementById('text');if(!s||!t)return;
+ const size=Math.max(10,Math.min(50,Number(document.getElementById('designSize')?.value)||20)),pos=document.getElementById('designPosition')?.value||'center';
+ t.style.fontSize=size+'px';t.style.textAlign='center';
+ const positions={top:'20%',center:'50%',bottom:'80%'};t.style.position='absolute';t.style.left='50%';t.style.top=positions[pos]||'50%';t.style.transform='translate(-50%,-50%)';
+ s.style.backgroundPosition='center';s.dataset.position=pos;
+}
+function saveOrder(product,qty,total,payment){const id='NP'+Date.now().toString().slice(-6);orders.push({id,product,qty,total,payment,date:new Date().toLocaleString()});localStorage.setItem('npOrders',JSON.stringify(orders));return id;}
+function sendWhatsApp(){
+ const [product,price]=document.getElementById('orderProduct').value.split('|'),qty=Number(document.getElementById('orderQty').value),name=document.getElementById('customerName').value.trim(),phone=document.getElementById('customerPhone').value.trim(),address=document.getElementById('customerAddress').value.trim(),note=document.getElementById('customerNote').value.trim(),payment=getPayment();
+ if(!name||!phone||!address){alert('Please enter your name, phone number and delivery address.');return}
+ if(!/^[0-9]{10}$/.test(phone.replace(/\D/g,''))){alert('Please enter a valid 10-digit phone number.');return}
+ const p=products.find(x=>x.name===product);
+ if(p && qty>(p.stock??0)){alert('Only '+(p.stock??0)+' item(s) are in stock.');return}
+ const sub=Number(price)*qty,delivery=sub>=999?0:60,total=sub+delivery;
+ if(payment==='UPI' && !confirm('UPI payment selected. You can pay using the UPI button after placing the order. Continue?'))return;
+ const id=saveOrder(product,qty,total,payment);
+ if(p){p.stock=Math.max(0,(p.stock??0)-qty);persistProducts();}
+ const msg=`Hello NP Fashion! I want to place an order.%0A%0AOrder ID: ${id}%0AProduct: ${encodeURIComponent(product)}%0ASize: ${encodeURIComponent(document.getElementById('orderSize').value)}%0AColour: ${encodeURIComponent(window.selectedColor||'Black')}%0AQuantity: ${qty}%0ASubtotal: ₹${sub}%0ADelivery: ₹${delivery}%0ATotal: ₹${total}%0APayment: ${encodeURIComponent(payment)}%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AAddress: ${encodeURIComponent(address)}%0ANote: ${encodeURIComponent(note||'None')}`;
+ window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+msg,'_blank');
+ renderProducts();renderAdmin();renderProfile();refreshOrderProducts();
+ setTimeout(()=>alert('Order saved! Order ID: '+id),100);
+}
+function showUPI(){const amount=document.getElementById('orderTotal').textContent.replace('₹','');if(confirm('UPI ID: '+UPI_ID+'\nAmount: ₹'+amount+'\n\nOpen your UPI app to pay?'))location.href='upi://pay?pa='+encodeURIComponent(UPI_ID)+'&pn=NP%20Fashion&am='+amount+'&cu=INR'}
+function submitRating(){const product=document.getElementById('rateProduct').value,stars=Number(document.getElementById('rateStars').value),arr=JSON.parse(localStorage.getItem('npRatings')||'[]');arr.push({product,stars,date:new Date().toLocaleString()});localStorage.setItem('npRatings',JSON.stringify(arr));document.getElementById('ratingMsg').textContent='Thanks! Rating saved on this browser.';}
+function printInvoice(){const o=orders[orders.length-1];if(!o){alert('No order found.');return}const w=window.open('','_blank');w.document.write(`<html><head><title>NP Fashion Invoice ${npEscape(o.id)}</title><style>body{font-family:Arial;padding:30px;max-width:700px;margin:auto}hr{border:0;border-top:1px solid #ddd}</style></head><body><h1>NP Fashion</h1><p>Invoice / Order Receipt</p><hr><p><b>Order ID:</b> ${npEscape(o.id)}</p><p><b>Product:</b> ${npEscape(o.product)}</p><p><b>Quantity:</b> ${o.qty}</p><p><b>Payment:</b> ${npEscape(o.payment)}</p><h2>Total: ₹${o.total}</h2><p>Thank you for shopping with NP Fashion.</p><button onclick="print()">Print</button></body></html>`);w.document.close();}
+refreshOrderProducts();renderProducts();renderWishlist();renderProfile();renderRating();renderAdmin();updateCart();updateOrderPrice();updateDesigner();
+
+
+// Backend connection helper
+async function checkBackend(){
+ try{
+  const r=await fetch(BACKEND_URL,{method:'GET'});
+  console.log('NP Fashion backend:',r.ok?'connected':'online but returned '+r.status);
+ }catch(e){console.warn('NP Fashion backend unavailable:',e.message);}
+}
+checkBackend();
+</script>
+
+</body>
+</html>
